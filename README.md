@@ -21,3 +21,8 @@ npm install
 ```bash
 npm run dev
 ```
+
+### Setup instructions for tailwind
+
+[Tailwind official instruction doc](https://tailwindcss.com/docs/installation/using-vite)
+
