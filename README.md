@@ -1,31 +1,23 @@
-# LMS Project 
+# LMS Project
 
-### Setup instructions
+## 🚀 Setup Instructions
 
-1. Clone the project
+### 1. Clone the project
+```bash
+git clone https://github.com/SumitSnippetsHub/LMS-Project.git
+```
 
-'''
-    git clone https://github.com/SumitSnippetsHub/LMS-Project.git
-'''
+### 2. Move into the directory
+```bash
+cd lms-project
+```
 
-2.Move into the directory
+### 3. Install dependencies
+```bash
+npm install
+```
 
-'''
-    cd lms-project
-'''
-
-3. install dependencies
-
-'''
-   npm i
-'''
-
-4. run the server
-
-'''
-   npm run dev
-'''
-
-
-
-
+### 4. Run the server
+```bash
+npm run dev
+```
