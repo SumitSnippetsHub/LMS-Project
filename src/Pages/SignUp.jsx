@@ -11,7 +11,7 @@ export default function SignUp() {
     const navigate = useNavigate();
 
     const [signupData, setSignupData] = useState({
-        fullname: "",
+        fullName: "",
         email: "",
         password: "",
         avatar: ""
@@ -50,16 +50,16 @@ export default function SignUp() {
     function createAccount(event) {
         event.preventDefault();
 
-        if (!signupData.email || !signupData.avatar || !signupData.fullname || !signupData.password) {
+        if (!signupData.email || !signupData.avatar || !signupData.fullName || !signupData.password) {
             toast.error("Please fill all the details");
             return;
         }
         console.log("yess")
 
         // checking the name field length
-        if (signupData.fullname.length < 3) {
+        if (signupData.fullName.length < 3) {
             // console.log("end")
-            // console.log(signupData.fullname.length);
+            // console.log(signupData.fullName.length);
             toast.error("Name should be atleast of 3 characters");
             return;
         }
@@ -67,7 +67,38 @@ export default function SignUp() {
         // checking email validation
         if (!signupData.email.match(
             /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|.(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
-        ));
+        )) {
+            toast.error("Invalid email id");
+            return;
+        };
+
+        if (!signupData.password.match(
+            /^(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{6,16}$/
+        )) {
+            toast.error("Password should be 6 - 16 character long with atleast a number and special character");
+            return;
+        }
+
+        // formData
+        const formData = new FormData();
+        formData.append("fullName", signupData.fullName);
+        formData.append("email", signupData.email);
+        formData.append("password", signupData.password);
+        formData.append("avatar", signupData.avatar);
+
+        // console.log(formData);
+
+        //create account action
+        navigate("/");
+        setSignupData({
+            fullName: "",
+            email: "",
+            password: "",
+            avatar: ""
+        })
+        setPreviewImage("");
+
+
     }
 
     const [previewImage, setPreviewImage] = useState("");
@@ -91,15 +122,15 @@ export default function SignUp() {
                     <input onChange={getImage} type="file" className="hidden" id="image-uploads" accept=".jpg, .jpeg, .png, .svg" />
 
                     <div className="flex flex-col gap-1">
-                        <label htmlFor="fullname" className="font-semibold">Name</label>
+                        <label htmlFor="fullName" className="font-semibold">Name</label>
                         <input type="text"
                             // required
-                            name="fullname"
-                            id="fullname"
+                            name="fullName"
+                            id="fullName"
                             placeholder="Enter your name"
                             className="bg-transparent px-2 py-1 border"
                             onChange={handleUserInput}
-                            value={signupData.fullname}
+                            value={signupData.fullName}
                         />
                     </div>
 
