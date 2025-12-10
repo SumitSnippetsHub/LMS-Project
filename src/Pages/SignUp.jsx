@@ -4,6 +4,7 @@ import { BsPersonCircle } from "react-icons/bs";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { toast } from 'react-hot-toast';
+import { createAccount } from "../Redux/Slices/AuthSlice";
 
 export default function SignUp() {
 
@@ -47,14 +48,14 @@ export default function SignUp() {
 
     }
 
-    function createAccount(event) {
+    async function createNewAccount(event) {
         event.preventDefault();
 
         if (!signupData.email || !signupData.avatar || !signupData.fullName || !signupData.password) {
             toast.error("Please fill all the details");
             return;
         }
-        console.log("yess")
+        // console.log("yess")
 
         // checking the name field length
         if (signupData.fullName.length < 3) {
@@ -89,7 +90,11 @@ export default function SignUp() {
         // console.log(formData);
 
         //create account action
-        navigate("/");
+        const response = await dispatch(createAccount(formData));
+        // console.log(response);
+        if (response?.payload?.success)
+            navigate("/");
+
         setSignupData({
             fullName: "",
             email: "",
@@ -97,8 +102,6 @@ export default function SignUp() {
             avatar: ""
         })
         setPreviewImage("");
-
-
     }
 
     const [previewImage, setPreviewImage] = useState("");
@@ -107,7 +110,7 @@ export default function SignUp() {
     return (
         <HomeLayout>
             <div className="flex items-center justify-center h-screen w-full">
-                <form onSubmit={createAccount} noValidate className="flex flex-col justify-center gap-3 rounded-lg p-4 text-white w-96 shadow-[0_0_10px_black]" action="">
+                <form onSubmit={createNewAccount} noValidate className="flex flex-col justify-center gap-3 rounded-lg p-4 text-white w-96 shadow-[0_0_10px_black]" action="">
                     <h1 className="text-center text-2xl font-bold">
                         Registration page
                     </h1>
