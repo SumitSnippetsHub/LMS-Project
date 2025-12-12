@@ -4,6 +4,7 @@ import { Link, Outlet, useNavigate, useLocation } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 
 import Footer from '../Components/Footer.jsx'
+import { logout } from '../Redux/Slices/AuthSlice.js'
 
 export default function HomeLayout({ children }) {
 
@@ -30,10 +31,10 @@ export default function HomeLayout({ children }) {
         drawerSide[0].style.width = 0;
     }
 
-    function handleLogout(e) {
+    async function handleLogout(e) {
         e.preventDefault();
 
-        // const res = await dispatch(logout());
+        const res = await dispatch(logout());
         if (res?.payload?.success)
             navigate("/")
     }
