@@ -3,6 +3,7 @@ import HomeLayout from "../Layouts/HomeLayout";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import toast from "react-hot-toast";
+import axiosInstance from "../Helpers/axiosInstance";
 
 export default function Contact() {
 
@@ -24,7 +25,7 @@ export default function Contact() {
         })
     }
 
-    console.log(contactData);
+    // console.log(contactData);
 
     async function createForm(event) {
         event.preventDefault();
@@ -57,8 +58,27 @@ export default function Contact() {
             toast.error("message should be atleast of 10 characters");
             return;
         }
-        toast.success("Form submitted successfully");
-        return await navigate("/");
+
+        try {
+            const response = axiosInstance.post('/contact', contactData);
+            toast.promise(response, {
+                loading: "Submitting your message...",
+                success: "Form submitted successfully",
+                error: "Failed to submit the form"
+            });
+            const contactResponse = await response;
+            if (contactResponse?.data?.success) {
+                //reset the form to empty after completion
+                setContactData({
+                    name: "",
+                    email: "",
+                    message: "",
+                });
+            }
+        } catch (err) {
+            toast.error("operation failed.....");
+        }
+        // return await navigate("/");
     }
     return (
 
@@ -79,6 +99,7 @@ export default function Contact() {
                             name="name"
                             placeholder="Enter your name"
                             onChange={handleUserInput}
+                            value={contactData.name}//used for set empty the value afetr form submitting
                         />
                     </div>
 
@@ -90,6 +111,7 @@ export default function Contact() {
                             name="email"
                             placeholder="Enter your email"
                             onChange={handleUserInput}
+                            value={contactData.email}//used for set empty the value afetr form submitting
                         />
                     </div>
 
@@ -100,6 +122,7 @@ export default function Contact() {
                             name="message"
                             placeholder="Enter your message here..."
                             onChange={handleUserInput}
+                            value={contactData.message} //used for set empty the value afetr form submitting
                         />
                     </div>
                     <button type="submit"
