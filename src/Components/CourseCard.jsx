@@ -7,7 +7,7 @@ export default function CourseCard({ data }) {
         <div onClick={() => navigate("/course/description", { state: { ...data } })}
             className="text-white w-88 h-[430ox] shadow-lg rounded-lg cursor-pointer group overflow-hidden bg-zinc-700">
             <div className="overflow-hidden">
-                <img className="h-48 w-full rounded-tl-lg rounded-tr-lg group-hover:scale-[1.2] transition-all ease-in-out duration-300"
+                <img className="h-48 w-full rounded-tl-lg rounded-tr-lg group-hover:scale-[1.1] transition-all ease-in-out duration-400"
                     src={data?.thumbnail?.secure_url} alt="course thumbnail"
                 />
                 <div className="p-3 space-y-1 text-white">
