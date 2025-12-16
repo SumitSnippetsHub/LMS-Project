@@ -26,7 +26,7 @@ export default function CourseCard({ data }) {
                         {data?.numberoflectures}
                     </p>
                     <p className="font-semibold">
-                        <span className="text-yellow-500 font-bold">Instructor :</span>
+                        <span className="text-yellow-500 font-bold">Instructor : </span>
                         {data?.createdBy}
                     </p>
                 </div>
