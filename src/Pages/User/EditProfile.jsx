@@ -48,7 +48,7 @@ export default function EditProfile() {
     }
 
     async function onFormSubmit(event) {
-        console.log(data);
+        // console.log(data);
         event.preventDefault();
 
         // if (!data.fullName || !data.avatar) {
@@ -63,7 +63,7 @@ export default function EditProfile() {
         const formData = new FormData();
         formData.append("fullName", data.fullName);
         formData.append("avatar", data.avatar);
-        console.log(data)
+
         //create account action
         await dispatch(updateProfile({ id: data.userId, data: formData }));
         // console.log(response);
