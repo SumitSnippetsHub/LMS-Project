@@ -15,6 +15,7 @@ import CreateCourse from './Pages/Course/CreateCourse.jsx'
 import Profile from './Pages/User/Profile.jsx'
 import EditProfile from './Pages/User/EditProfile.jsx'
 import DisplayLectures from './Pages/Dashboard/DisplayLectures.jsx'
+import AddLecture from './Pages/Dashboard/AddLecture.jsx'
 
 function App() {
 
@@ -30,6 +31,7 @@ function App() {
 
         <Route element={<RequireAuth allowedRoles={["ADMIN"]} />}>
           <Route path='/course/create' element={<CreateCourse />}></Route>
+          <Route path='/course/addlecture' element={<AddLecture />}></Route>
         </Route>
 
         <Route element={<RequireAuth allowedRoles={["ADMIN", "USER"]} />}>

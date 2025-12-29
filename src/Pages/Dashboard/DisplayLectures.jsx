@@ -10,6 +10,7 @@ export default function DisplayLectures() {
     const dispatch = useDispatch();
     const state = useLocation();
     const { lectures } = useSelector((state) => state.lecture);
+    // console.log(lectures);
     const { role } = useSelector((state) => state.auth);
 
     const [currVideo, setCurrVideo] = useState(0);
@@ -42,7 +43,7 @@ export default function DisplayLectures() {
                     <div className="flex justify-center gap-10 w-full">
                         {/*left section*/}
                         <div className="space-y-5 w-120 p-2 rounded-lg shadow-[0_0_10px_black]">
-                            <video src={lectures && lectures[currVideo]?.lecture?.secure_url}
+                            <video src={lectures && lectures[currVideo]?.lectures?.secure_url}
                                 className="object-fill rounded-tl-lg rounded-tr-lg w-full"
                                 controls
                                 disablePictureInPicture
